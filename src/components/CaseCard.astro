@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
 
 interface Props {
   item: CollectionEntry<'caseStudies'>;
@@ -9,7 +10,13 @@ const { item, headingLevel = 3 } = Astro.props;
 const d = item.data;
 const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
-<article class="card case-card">
-  <H class="card-title"><a href={`/work/${item.id}/`}>{d.cardTitle}</a></H>
+<article class="card case-card reveal">
+  {d.tags.length > 0 && (
+    <ul class="tags" aria-label="Tags">
+      {d.tags.map((t) => <li>{t}</li>)}
+    </ul>
+  )}
+  <H class="card-title"><a class="card-link" href={`/work/${item.id}/`}>{d.cardTitle}</a></H>
   <p>{d.summary}</p>
+  <span class="card-arrow" aria-hidden="true"><Icon name="arrow" /></span>
 </article>

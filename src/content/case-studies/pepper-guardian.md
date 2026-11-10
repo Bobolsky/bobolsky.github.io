@@ -4,6 +4,7 @@ cardTitle: Pepper mall assistant
 summary: University project, sole author.
 attribution: University cognitive-robotics project, University of Salerno. Sole author.
 order: 4
+tags: [Robotics, University project]
 repo: https://github.com/Bobolsky/Pepper_Guardian_Mall
 ---
 

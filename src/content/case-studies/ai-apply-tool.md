@@ -4,6 +4,7 @@ cardTitle: AI Apply Tool
 summary: Personal CrewAI project.
 attribution: Personal project. Sole author.
 order: 5
+tags: [AI agents, Personal project]
 repo: https://github.com/Bobolsky/Multi-Agent-AI-Apply-Tool
 ---
 

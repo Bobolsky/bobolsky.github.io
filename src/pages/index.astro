@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import CaseCard from '../components/CaseCard.astro';
+import BookingActions from '../components/BookingActions.astro';
+import Portrait from '../components/Portrait.astro';
 import site from '../data/site.json';
 import { getPage, getCaseStudies } from '../lib/content';
 
@@ -10,28 +12,36 @@ const h = home.data as Record<string, any>;
 ---
 <Base description={home.data.description}>
   <section class="hero">
-    <div class="container">
-      <h1>{h.heroTitle}</h1>
-      <p class="lead">{h.heroSubtitle}</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="/contact/">{h.ctaPrimary}</a>
-        <a class="btn btn-secondary" href="/work/">{h.ctaSecondary}</a>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1>{h.heroTitle}</h1>
+        <p class="lead">{h.heroSubtitle}</p>
+        <BookingActions contactHref="/contact/" contactLabel={h.ctaPrimary}>
+          <a class="btn btn-ghost" href="/work/">{h.ctaSecondary}</a>
+        </BookingActions>
+        {Array.isArray(h.trustLine) && (
+          <ul class="trust" aria-label="At a glance">
+            {h.trustLine.map((t: string) => <li>{t}</li>)}
+          </ul>
+        )}
       </div>
-      {Array.isArray(h.trustLine) && (
-        <ul class="trust" aria-label="At a glance">
-          {h.trustLine.map((t: string) => <li>{t}</li>)}
-        </ul>
-      )}
+      <div class="hero-media">
+        <Portrait size="lg" eager />
+      </div>
     </div>
   </section>
 
   <section class="section" aria-labelledby="expertise-heading">
     <div class="container">
-      <h2 id="expertise-heading">Expertise</h2>
-      <p class="lead">{h.expertiseIntro}</p>
+      <div class="section-head reveal">
+        <h2 id="expertise-heading">Expertise</h2>
+        <p class="lead">{h.expertiseIntro}</p>
+      </div>
       <div class="grid grid-2">
-        {h.expertise.map((e: { title: string; text: string }) => (
-          <article class="card">
+        {h.expertise.map((e: { title: string; text: string }, i: number) => (
+          <article class="card expertise-card reveal">
+            <span class="card-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="card-title">{e.title}</h3>
             <p>{e.text}</p>
           </article>
@@ -42,7 +52,9 @@ const h = home.data as Record<string, any>;
 
   <section class="section alt" aria-labelledby="work-heading">
     <div class="container">
-      <h2 id="work-heading">Selected work</h2>
+      <div class="section-head reveal">
+        <h2 id="work-heading">Selected work</h2>
+      </div>
       <div class="grid grid-3">
         {work.map((c) => <CaseCard item={c} />)}
       </div>
@@ -50,12 +62,13 @@ const h = home.data as Record<string, any>;
     </div>
   </section>
 
-  <section class="section cta-band" aria-labelledby="cta-heading">
-    <div class="container narrow center">
-      <h2 id="cta-heading">{h.ctaTitle}</h2>
-      <p>Get in touch — <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
-      <p>Calendar: {site.calendarUrl ? <a href={site.calendarUrl} rel="noopener" target="_blank">Book a time<span class="visually-hidden"> (opens in a new tab)</span></a> : site.calendarLabel}</p>
-      <a class="btn btn-primary" href="/contact/">{h.ctaPrimary}</a>
+  <section class="section" aria-labelledby="cta-heading">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2 id="cta-heading">{h.ctaTitle}</h2>
+        <p>Get in touch — <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+        <BookingActions contactHref="/contact/" contactLabel={h.ctaPrimary} center />
+      </div>
     </div>
   </section>
 </Base>

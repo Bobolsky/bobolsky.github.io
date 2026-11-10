@@ -1,0 +1,26 @@
+---
+// Primary contact actions: "Book a call" (only when site.calendarUrl is a real http(s) URL)
+// next to the email / "Get in touch" path. Extra actions can be passed in the default slot.
+import Icon from './Icon.astro';
+import { booking } from '../lib/booking';
+
+interface Props {
+  contactHref: string;
+  contactLabel?: string;
+  center?: boolean;
+}
+const { contactHref, contactLabel = 'Get in touch', center = false } = Astro.props;
+---
+<div class:list={['actions', { 'actions-center': center }]}>
+  {booking && (
+    <a class="btn btn-primary" href={booking.url} rel="noopener" target="_blank">
+      <Icon name="calendar" />
+      <span>{booking.label}</span><span class="visually-hidden"> (opens in a new tab)</span>
+    </a>
+  )}
+  <a class:list={['btn', booking ? 'btn-contrast' : 'btn-primary']} href={contactHref}>
+    {contactHref.startsWith('mailto:') && <Icon name="mail" />}
+    <span>{contactLabel}</span>
+  </a>
+  <slot />
+</div>

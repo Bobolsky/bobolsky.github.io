@@ -12,6 +12,7 @@ const caseStudies = defineCollection({
     summary: z.string(), // one-line teaser on cards
     attribution: z.string(), // shown under the title on the case-study page
     order: z.number().default(100),
+    tags: z.array(z.string()).default([]), // short labels drawn from existing copy, shown as pills
     repo: z.string().url().optional(),
     draft: z.boolean().default(false),
   }),

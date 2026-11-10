@@ -1,0 +1,22 @@
+---
+// Andrea's portrait, served from public/andrea.jpg (emitted as /andrea.jpg).
+// NOTE: public/andrea.jpg was not in the repo when this was built — add the photo there.
+interface Props {
+  size?: 'lg' | 'md';
+  eager?: boolean;
+}
+const { size = 'lg', eager = false } = Astro.props;
+const dim = size === 'lg' ? 520 : 320;
+---
+<figure class:list={['portrait', `portrait-${size}`]}>
+  <img
+    src="/andrea.jpg"
+    alt="Andrea Zinno"
+    width={dim}
+    height={Math.round(dim * 1.2)}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    fetchpriority={eager ? 'high' : undefined}
+    onerror="this.closest('figure')?.classList.add('is-missing'); this.remove();"
+  />
+</figure>

@@ -20,6 +20,11 @@ const { Content } = await render(item);
       <div class="container narrow">
         <p class="eyebrow"><a href="/work/">Selected work</a></p>
         <h1>{d.title}</h1>
+        {d.tags.length > 0 && (
+          <ul class="tags" aria-label="Tags">
+            {d.tags.map((t) => <li>{t}</li>)}
+          </ul>
+        )}
         <p class="lead">{d.attribution}</p>
         {d.repo && (
           <dl class="meta">
@@ -28,7 +33,7 @@ const { Content } = await render(item);
         )}
       </div>
     </header>
-    <div class="section">
+    <div class="section section-tight">
       <div class="container narrow prose">
         <Content />
       </div>

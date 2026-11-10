@@ -4,6 +4,7 @@ cardTitle: Pedestrian tracking and attribute recognition
 summary: Master’s thesis. Sole author.
 attribution: Master’s thesis. Sole author.
 order: 3
+tags: [Computer vision, Tracking, Master’s thesis]
 repo: https://github.com/Bobolsky/PedVision-YOLOX-DeepSort-MTAN
 ---
 

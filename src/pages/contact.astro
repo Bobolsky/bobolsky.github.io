@@ -1,7 +1,9 @@
 ---
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import BookingActions from '../components/BookingActions.astro';
 import site from '../data/site.json';
+import { booking } from '../lib/booking';
 import { getPage } from '../lib/content';
 
 const page = await getPage('contact');
@@ -13,9 +15,11 @@ const { Content } = await render(page);
       <h1>Contact</h1>
     </div>
   </section>
-  <section class="section">
+  <section class="section section-tight">
     <div class="container narrow">
-      <div class="prose"><Content /></div>
+      <div class="prose lead-prose"><Content /></div>
+
+      <BookingActions contactHref={`mailto:${site.email}`} />
 
       <dl class="contact-list">
         <div>
@@ -38,10 +42,12 @@ const { Content } = await render(page);
           <dt>Location</dt>
           <dd>{site.location}</dd>
         </div>
-        <div>
-          <dt>Calendar</dt>
-          <dd>{site.calendarUrl ? <a href={site.calendarUrl} rel="noopener" target="_blank">Book a time<span class="visually-hidden"> (opens in a new tab)</span></a> : site.calendarLabel}</dd>
-        </div>
+        {booking && (
+          <div>
+            <dt>Calendar</dt>
+            <dd><a href={booking.url} rel="noopener" target="_blank">{booking.label}<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
+          </div>
+        )}
       </dl>
     </div>
   </section>

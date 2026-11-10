@@ -1,6 +1,10 @@
 ---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/newsreader/opsz.css';
 import '../styles/global.css';
 import site from '../data/site.json';
+import Icon from '../components/Icon.astro';
+import { booking } from '../lib/booking';
 
 interface Props {
   title?: string;
@@ -33,19 +37,29 @@ const isActive = (href: string) => {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/">{site.name}</a>
-        <nav aria-label="Main">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">AZ</span>
+          <span>{site.name}</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
+          <span class="nav-toggle-bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Main">
           <ul>
             {nav.map((item) => (
               <li>
@@ -63,13 +77,55 @@ const isActive = (href: string) => {
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© {new Date().getFullYear()} {site.name} · {site.footerTagline}</p>
+        <div class="footer-brand">
+          <p class="footer-name">{site.name}</p>
+          <p class="footer-tagline">{site.footerTagline}</p>
+          <p class="footer-copy">© {new Date().getFullYear()} {site.name}</p>
+        </div>
         <ul class="footer-links">
-          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-          <li><a href={site.github} rel="me noopener" target="_blank">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-          <li><a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href={site.github} rel="me noopener" target="_blank"><Icon name="github" /><span>GitHub</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href={site.linkedin} rel="me noopener" target="_blank"><Icon name="linkedin" /><span>LinkedIn</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href={`mailto:${site.email}`}><Icon name="mail" /><span>{site.email}</span></a></li>
+          {booking && (
+            <li><a href={booking.url} rel="noopener" target="_blank"><Icon name="calendar" /><span>{booking.label}</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          )}
         </ul>
       </div>
     </footer>
+
+    <script is:inline>
+      (() => {
+        // Mobile nav: progressive enhancement. Without JS the nav simply wraps.
+        const btn = document.querySelector('.nav-toggle');
+        const nav = document.getElementById('site-nav');
+        if (btn && nav) {
+          btn.hidden = false;
+          const set = (open) => {
+            btn.setAttribute('aria-expanded', String(open));
+            nav.classList.toggle('is-open', open);
+          };
+          btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+          nav.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('is-open')) { set(false); btn.focus(); }
+          });
+          matchMedia('(min-width: 48rem)').addEventListener('change', () => set(false));
+        }
+
+        // Fade-in on scroll. Disabled for reduced motion (content is shown immediately).
+        const items = document.querySelectorAll('.reveal');
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) {
+          items.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+          });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        items.forEach((el) => io.observe(el));
+      })();
+    </script>
   </body>
 </html>

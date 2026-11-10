@@ -1,6 +1,8 @@
 ---
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Portrait from '../components/Portrait.astro';
+import Icon from '../components/Icon.astro';
 import site from '../data/site.json';
 import { getPage } from '../lib/content';
 
@@ -9,17 +11,18 @@ const { Content } = await render(page);
 ---
 <Base title={page.data.title} description={page.data.description}>
   <section class="page-header">
-    <div class="container narrow">
+    <div class="container narrow about-header">
+      <Portrait size="md" eager />
       <h1>About</h1>
     </div>
   </section>
-  <section class="section">
+  <section class="section section-tight">
     <div class="container narrow">
       <div class="prose"><Content /></div>
       <p class="actions">
         <a class="btn btn-primary" href="/contact/">Get in touch</a>
-        <a class="btn btn-secondary" href={site.github} rel="me noopener" target="_blank">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a>
-        <a class="btn btn-secondary" href={site.linkedin} rel="me noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+        <a class="btn btn-secondary" href={site.github} rel="me noopener" target="_blank"><Icon name="github" /><span>GitHub</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+        <a class="btn btn-secondary" href={site.linkedin} rel="me noopener" target="_blank"><Icon name="linkedin" /><span>LinkedIn</span><span class="visually-hidden"> (opens in a new tab)</span></a>
       </p>
     </div>
   </section>
