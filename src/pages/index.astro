@@ -1,0 +1,68 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CaseCard from '../components/CaseCard.astro';
+import { getPage, getServices, getCaseStudies } from '../lib/content';
+
+const home = await getPage('home');
+const servicesPage = await getPage('services');
+const { Content: AboutTeaser } = await render(home);
+const services = await getServices();
+const featured = (await getCaseStudies()).filter((c) => c.data.featured);
+const h = home.data as Record<string, any>;
+---
+<Base description={home.data.description}>
+  <section class="hero">
+    <div class="container">
+      <h1>{h.heroTitle}</h1>
+      <p class="lead">{h.heroSubtitle}</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/contact/">{h.ctaPrimary}</a>
+        <a class="btn btn-secondary" href="/work/">{h.ctaSecondary}</a>
+      </div>
+      {Array.isArray(h.trustLine) && (
+        <ul class="trust" aria-label="At a glance">
+          {h.trustLine.map((t: string) => <li>{t}</li>)}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="services-heading">
+    <div class="container">
+      <h2 id="services-heading">{(servicesPage.data as any).umbrellaTitle}</h2>
+      <p class="lead">{(servicesPage.data as any).umbrellaText}</p>
+      <div class="grid grid-3">
+        {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+      <p><a class="link-arrow" href="/services/">Scope and deliverables for each package</a></p>
+    </div>
+  </section>
+
+  <section class="section alt" aria-labelledby="work-heading">
+    <div class="container">
+      <h2 id="work-heading">Selected work</h2>
+      <div class="grid grid-2">
+        {featured.map((c) => <CaseCard item={c} />)}
+      </div>
+      <p><a class="link-arrow" href="/work/">All case studies</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="about-heading">
+    <div class="container narrow">
+      <h2 id="about-heading">About</h2>
+      <div class="prose"><AboutTeaser /></div>
+      <p><a class="link-arrow" href="/about/">More about me</a></p>
+    </div>
+  </section>
+
+  <section class="section cta-band" aria-labelledby="cta-heading">
+    <div class="container narrow center">
+      <h2 id="cta-heading">Have a scoped CV or ML problem?</h2>
+      <p>Send the context and I'll tell you honestly whether I'm a fit and how I'd approach it.</p>
+      <a class="btn btn-primary" href="/contact/">{h.ctaPrimary}</a>
+    </div>
+  </section>
+</Base>

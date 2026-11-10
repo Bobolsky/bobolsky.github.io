@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  item: CollectionEntry<'caseStudies'>;
+  headingLevel?: 2 | 3;
+}
+const { item, headingLevel = 3 } = Astro.props;
+const d = item.data;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+<article class="card case-card">
+  <H class="card-title"><a href={`/work/${item.id}/`}>{d.title}</a></H>
+  <p>{d.summary}</p>
+  {d.tags.length > 0 && (
+    <ul class="tags" aria-label="Technologies">
+      {d.tags.map((t) => <li>{t}</li>)}
+    </ul>
+  )}
+</article>

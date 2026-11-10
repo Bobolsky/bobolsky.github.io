@@ -1,0 +1,46 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { getPage } from '../lib/content';
+
+const page = await getPage('contact');
+const { Content } = await render(page);
+const emailIsReal = /^[^\s@\[\]]+@[^\s@\[\]]+$/.test(site.email);
+---
+<Base title={page.data.title} description={page.data.description}>
+  <section class="page-header">
+    <div class="container narrow">
+      <p class="eyebrow">Contact</p>
+      <h1>Let's talk about your project</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container narrow">
+      <div class="prose"><Content /></div>
+
+      <dl class="contact-list">
+        <div>
+          <dt>Email</dt>
+          <dd>{emailIsReal ? <a href={`mailto:${site.email}`}>{site.email}</a> : site.email}</dd>
+        </div>
+        <div>
+          <dt>Book a 20-min intro</dt>
+          <dd>{site.calendarUrl ? <a href={site.calendarUrl} rel="noopener" target="_blank">Pick a time<span class="visually-hidden"> (opens in a new tab)</span></a> : site.calendarLabel}</dd>
+        </div>
+        <div>
+          <dt>LinkedIn</dt>
+          <dd><a href={site.linkedin} rel="me noopener" target="_blank">linkedin.com/in/andreazinno00<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
+        </div>
+        <div>
+          <dt>GitHub</dt>
+          <dd><a href={site.github} rel="me noopener" target="_blank">github.com/Bobolsky<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
+        </div>
+        <div>
+          <dt>Location</dt>
+          <dd>{site.location}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+  service: CollectionEntry<'services'>;
+  detailed?: boolean;
+  headingLevel?: 2 | 3;
+}
+const { service, detailed = false, headingLevel = 3 } = Astro.props;
+const d = service.data;
+const { Content } = await render(service);
+const H = `h${headingLevel}` as 'h2' | 'h3';
+const Sub = `h${headingLevel + 1}` as 'h3' | 'h4';
+---
+<article class="card service-card" id={`package-${d.code.toLowerCase()}`}>
+  <p class="eyebrow">Package {d.code}</p>
+  <H class="card-title">{d.title}</H>
+  <p class="muted">{d.tagline}</p>
+  {detailed && (
+    <>
+      <Sub class="sub">Scope</Sub>
+      <p>{d.scope}</p>
+      <Sub class="sub">Deliverables</Sub>
+      <ul>{d.deliverables.map((x) => <li>{x}</li>)}</ul>
+      <div class="prose small"><Content /></div>
+    </>
+  )}
+  <dl class="meta">
+    <div><dt>Typical duration</dt><dd>{d.duration}</dd></div>
+    <div><dt>Price</dt><dd>{d.price}</dd></div>
+  </dl>
+</article>

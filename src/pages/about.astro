@@ -1,0 +1,27 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { getPage } from '../lib/content';
+
+const page = await getPage('about');
+const { Content } = await render(page);
+---
+<Base title={page.data.title} description={page.data.description}>
+  <section class="page-header">
+    <div class="container narrow">
+      <p class="eyebrow">About</p>
+      <h1>{site.name}</h1>
+      <p class="lead">{site.role} · {site.location}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container narrow">
+      <div class="prose"><Content /></div>
+      <p class="actions">
+        <a class="btn btn-secondary" href={site.github} rel="me noopener" target="_blank">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a>
+        <a class="btn btn-secondary" href={site.linkedin} rel="me noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+      </p>
+    </div>
+  </section>
+</Base>

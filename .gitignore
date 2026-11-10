@@ -1,0 +1,19 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs / env
+npm-debug.log*
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Private source notes — never commit or publish
+CONTENT_SOURCE_notion_export.txt
