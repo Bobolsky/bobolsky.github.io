@@ -6,13 +6,11 @@ import { getPage } from '../lib/content';
 
 const page = await getPage('contact');
 const { Content } = await render(page);
-const emailIsReal = /^[^\s@\[\]]+@[^\s@\[\]]+$/.test(site.email);
 ---
 <Base title={page.data.title} description={page.data.description}>
   <section class="page-header">
     <div class="container narrow">
-      <p class="eyebrow">Contact</p>
-      <h1>Let's talk about your project</h1>
+      <h1>Contact</h1>
     </div>
   </section>
   <section class="section">
@@ -22,23 +20,27 @@ const emailIsReal = /^[^\s@\[\]]+@[^\s@\[\]]+$/.test(site.email);
       <dl class="contact-list">
         <div>
           <dt>Email</dt>
-          <dd>{emailIsReal ? <a href={`mailto:${site.email}`}>{site.email}</a> : site.email}</dd>
-        </div>
-        <div>
-          <dt>Book a 20-min intro</dt>
-          <dd>{site.calendarUrl ? <a href={site.calendarUrl} rel="noopener" target="_blank">Pick a time<span class="visually-hidden"> (opens in a new tab)</span></a> : site.calendarLabel}</dd>
+          <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
         </div>
         <div>
           <dt>LinkedIn</dt>
-          <dd><a href={site.linkedin} rel="me noopener" target="_blank">linkedin.com/in/andreazinno00<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
+          <dd><a href={site.linkedin} rel="me noopener" target="_blank">{site.linkedin}<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
         </div>
         <div>
           <dt>GitHub</dt>
-          <dd><a href={site.github} rel="me noopener" target="_blank">github.com/Bobolsky<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
+          <dd><a href={site.github} rel="me noopener" target="_blank">{site.github}<span class="visually-hidden"> (opens in a new tab)</span></a></dd>
+        </div>
+        <div>
+          <dt>Site</dt>
+          <dd><a href={site.url}>{site.url}</a></dd>
         </div>
         <div>
           <dt>Location</dt>
           <dd>{site.location}</dd>
+        </div>
+        <div>
+          <dt>Calendar</dt>
+          <dd>{site.calendarUrl ? <a href={site.calendarUrl} rel="noopener" target="_blank">Book a time<span class="visually-hidden"> (opens in a new tab)</span></a> : site.calendarLabel}</dd>
         </div>
       </dl>
     </div>

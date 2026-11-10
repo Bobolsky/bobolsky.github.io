@@ -6,10 +6,6 @@ export async function getPage(id: string) {
   return entry;
 }
 
-export async function getServices() {
-  return (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
-}
-
 export async function getCaseStudies() {
   return (await getCollection('caseStudies', ({ data }) => !data.draft)).sort(
     (a, b) => a.data.order - b.data.order,

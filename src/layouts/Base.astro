@@ -13,12 +13,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const nav = [
-  { href: '/services/', label: 'Services' },
+  { href: '/', label: 'Home' },
   { href: '/work/', label: 'Work' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
 const isActive = (href: string) => {
+  if (href === '/') return path === '/';
   const h = href.replace(/\/$/, '');
   return path === h || path.startsWith(h + '/');
 };
@@ -62,11 +63,11 @@ const isActive = (href: string) => {
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© {new Date().getFullYear()} {site.name}</p>
+        <p>© {new Date().getFullYear()} {site.name} · {site.footerTagline}</p>
         <ul class="footer-links">
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
           <li><a href={site.github} rel="me noopener" target="_blank">GitHub<span class="visually-hidden"> (opens in a new tab)</span></a></li>
           <li><a href={site.linkedin} rel="me noopener" target="_blank">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-          <li><a href="/contact/">Contact</a></li>
         </ul>
       </div>
     </footer>

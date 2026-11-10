@@ -1,11 +1,13 @@
 {
   "name": "Andrea Zinno",
-  "role": "Hands-on AI engineer",
+  "role": "AI Engineer",
   "description": "Hands-on AI engineer helping startups ship ML features — from computer vision to faster, cheaper models.",
-  "email": "[TO COMPLETE]",
+  "footerTagline": "AI engineer in Barcelona, working remotely with US and EU teams.",
+  "email": "andreazinno12@gmail.com",
   "calendarUrl": "",
-  "calendarLabel": "[TO COMPLETE: calendar link]",
-  "location": "Barcelona area · EU-based · remote · US-friendly hours by agreement",
+  "calendarLabel": "[TO COMPLETE: booking link]",
+  "location": "Barcelona · EU-based · remote · US-friendly hours by agreement",
+  "url": "https://bobolsky.github.io",
   "github": "https://github.com/Bobolsky",
   "linkedin": "https://www.linkedin.com/in/andreazinno00/"
 }

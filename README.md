@@ -10,20 +10,18 @@ All text lives in Markdown files under `src/content/` plus one settings file. Ea
 
 | What | File(s) |
 | --- | --- |
-| Name, email, calendar link, location, GitHub/LinkedIn URLs | `src/data/site.json` |
-| Home page hero (headline, subtitle, buttons, trust line) and the About teaser | `src/content/pages/home.md` |
-| About page | `src/content/pages/about.md` |
-| Services intro, umbrella offer and "How engagements work" | `src/content/pages/services.md` |
-| Starter packages (one file per package: scope, deliverables, duration, price) | `src/content/services/*.md` |
+| Name, email, calendar link, location, footer line, GitHub/LinkedIn URLs | `src/data/site.json` |
+| Home page hero, trust line, expertise list and CTA band | `src/content/pages/home.md` |
+| About page (bio, experience, education, skills) | `src/content/pages/about.md` |
 | Case studies (one file per project; the file name becomes the URL `/work/<file-name>/`) | `src/content/case-studies/*.md` |
 | Contact page intro text | `src/content/pages/contact.md` |
 
 Tips:
 
-- **Add a case study:** copy an existing file in `src/content/case-studies/`, rename it (e.g. `my-project.md`), and edit. `order` controls the sort order, `featured: true` shows it on the home page, `draft: true` hides it.
-- **Set prices:** change `price: "[PRICE TBD]"` in each `src/content/services/*.md` file (and `hourlyRate` / the text in `pages/services.md`).
-- **Set the email:** replace `"[TO COMPLETE]"` in `src/data/site.json` with a real address; the contact page will then render a `mailto:` link automatically. Set `calendarUrl` to a booking link to enable the "Pick a time" link.
-- **Placeholders:** any text written as `[TO COMPLETE]`, `[TO COMPLETE: note]` or `[PRICE TBD]` is highlighted in yellow on the site so unfinished content is easy to spot. Search the repo for `TO COMPLETE` and `PRICE TBD` to find all of them before publishing.
+- **Add a case study:** copy an existing file in `src/content/case-studies/`, rename it (e.g. `my-project.md`), and edit. `order` controls the sort order (all case studies appear on Home and Work), `draft: true` hides it.
+- **Set the booking link:** put the URL in `calendarUrl` in `src/data/site.json`; Home and Contact then show a "Book a time" link instead of the placeholder.
+- **No prices:** the site deliberately shows no prices or packages, only a "Get in touch" call to action.
+- **Placeholders:** any text written as `[TO COMPLETE]` or `[TO COMPLETE: note]` is highlighted in yellow on the site so unfinished content is easy to spot. Search the repo for `TO COMPLETE` to find them before publishing.
 
 If a required frontmatter field is missing or misspelled, the build will fail with a message naming the file. The field rules are defined in `src/content.config.ts`.
 
@@ -65,19 +63,18 @@ public/                        Static files copied as-is (favicon, robots.txt)
 src/
   content.config.ts            Content collection schemas
   content/
-    pages/                     Copy for home, about, services, contact
-    services/                  Starter packages (one .md each)
+    pages/                     Copy for home, about, contact
     case-studies/              Case studies (one .md each)
   data/site.json               Site-wide settings and contact details
-  components/                  ServiceCard, CaseCard
+  components/                  CaseCard
   layouts/Base.astro           Page shell: header, nav, footer, meta tags
   lib/                         Content helpers, placeholder pattern
-  middleware.ts                Highlights [TO COMPLETE] / [PRICE TBD] markers at build time
-  pages/                       Routes: /, /services, /work, /work/[slug], /about, /contact, 404
+  middleware.ts                Highlights [TO COMPLETE] markers at build time
+  pages/                       Routes: /, /work, /work/[slug], /about, /contact, 404
   styles/global.css            All styles (light/dark via prefers-color-scheme)
 ```
 
 ## Notes
 
-- `CONTENT_SOURCE_notion_export.txt` (private planning notes) is git-ignored and is not part of the build. Never commit it.
+- `CONTENT_SOURCE_notion_export.txt` and `CONTENT_FINAL_notion_export.txt` (private planning notes) are git-ignored and are not part of the build. Never commit them.
 - Everything on the site must be approved before publishing; don't add clients, metrics or results that aren't public and confirmed.

@@ -1,7 +1,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { PLACEHOLDER_RE } from './lib/placeholders.mjs';
 
-// Highlights placeholder markers ([TO COMPLETE], [TO COMPLETE: ...], [PRICE TBD]) in page text
+// Highlights placeholder markers ([TO COMPLETE], [TO COMPLETE: ...]) in page text
 // by wrapping them in <mark class="todo">. Runs at build time for static pages (and in dev),
 // so it works for Markdown content and frontmatter alike. Only text inside <body> is touched,
 // never attributes or <head>, so titles and meta descriptions stay plain.

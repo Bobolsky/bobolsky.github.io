@@ -1,2 +1,2 @@
-// Matches [TO COMPLETE], [TO COMPLETE: ...] and [PRICE TBD]
-export const PLACEHOLDER_RE = /\[(?:TO COMPLETE|PRICE TBD)(?::[^\]]*)?\]/g;
+// Matches [TO COMPLETE] and [TO COMPLETE: ...]
+export const PLACEHOLDER_RE = /\[TO COMPLETE(?::[^\]]*)?\]/g;

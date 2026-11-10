@@ -1,15 +1,11 @@
 ---
-import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import ServiceCard from '../components/ServiceCard.astro';
 import CaseCard from '../components/CaseCard.astro';
-import { getPage, getServices, getCaseStudies } from '../lib/content';
+import site from '../data/site.json';
+import { getPage, getCaseStudies } from '../lib/content';
 
 const home = await getPage('home');
-const servicesPage = await getPage('services');
-const { Content: AboutTeaser } = await render(home);
-const services = await getServices();
-const featured = (await getCaseStudies()).filter((c) => c.data.featured);
+const work = await getCaseStudies();
 const h = home.data as Record<string, any>;
 ---
 <Base description={home.data.description}>
@@ -29,39 +25,36 @@ const h = home.data as Record<string, any>;
     </div>
   </section>
 
-  <section class="section" aria-labelledby="services-heading">
+  <section class="section" aria-labelledby="expertise-heading">
     <div class="container">
-      <h2 id="services-heading">{(servicesPage.data as any).umbrellaTitle}</h2>
-      <p class="lead">{(servicesPage.data as any).umbrellaText}</p>
-      <div class="grid grid-3">
-        {services.map((s) => <ServiceCard service={s} />)}
+      <h2 id="expertise-heading">Expertise</h2>
+      <p class="lead">{h.expertiseIntro}</p>
+      <div class="grid grid-2">
+        {h.expertise.map((e: { title: string; text: string }) => (
+          <article class="card">
+            <h3 class="card-title">{e.title}</h3>
+            <p>{e.text}</p>
+          </article>
+        ))}
       </div>
-      <p><a class="link-arrow" href="/services/">Scope and deliverables for each package</a></p>
     </div>
   </section>
 
   <section class="section alt" aria-labelledby="work-heading">
     <div class="container">
       <h2 id="work-heading">Selected work</h2>
-      <div class="grid grid-2">
-        {featured.map((c) => <CaseCard item={c} />)}
+      <div class="grid grid-3">
+        {work.map((c) => <CaseCard item={c} />)}
       </div>
-      <p><a class="link-arrow" href="/work/">All case studies</a></p>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="about-heading">
-    <div class="container narrow">
-      <h2 id="about-heading">About</h2>
-      <div class="prose"><AboutTeaser /></div>
-      <p><a class="link-arrow" href="/about/">More about me</a></p>
+      <p><a class="link-arrow" href="/work/">See selected work</a></p>
     </div>
   </section>
 
   <section class="section cta-band" aria-labelledby="cta-heading">
     <div class="container narrow center">
-      <h2 id="cta-heading">Have a scoped CV or ML problem?</h2>
-      <p>Send the context and I'll tell you honestly whether I'm a fit and how I'd approach it.</p>
+      <h2 id="cta-heading">{h.ctaTitle}</h2>
+      <p>Get in touch — <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p>Calendar: {site.calendarUrl ? <a href={site.calendarUrl} rel="noopener" target="_blank">Book a time<span class="visually-hidden"> (opens in a new tab)</span></a> : site.calendarLabel}</p>
       <a class="btn btn-primary" href="/contact/">{h.ctaPrimary}</a>
     </div>
   </section>

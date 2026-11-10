@@ -1,36 +1,10 @@
 ---
-title: AI Apply Tool (multi-agent app)
-summary: A CrewAI multi-agent application that takes a resume and a job description and drafts a tailored resume, cover letter and interview guide, with a preview/edit UI.
-order: 3
-featured: false
-tags: [Multi-agent, CrewAI, Python, AI app]
+title: AI Apply Tool
+cardTitle: AI Apply Tool
+summary: Personal CrewAI project.
+attribution: Personal project. Sole author.
+order: 5
 repo: https://github.com/Bobolsky/Multi-Agent-AI-Apply-Tool
-role: "[TO COMPLETE]"
-context: Public GitHub project, February 2025
 ---
 
-## Overview
-
-A small AI application built with CrewAI. Given a resume and a job description, a set of cooperating agents drafts:
-
-- a tailored resume,
-- a cover letter,
-- an interview guide.
-
-A preview/edit UI lets the user review and adjust the generated documents.
-
-## Problem
-
-[TO COMPLETE]
-
-## Approach
-
-[TO COMPLETE: agent roles and workflow]
-
-## Results
-
-[TO COMPLETE]
-
-## What this shows
-
-A generalist example: shipping a small, self-contained AI app with a usable interface.
+A CrewAI multi-agent app that, given a resume and a job description, drafts a tailored resume, cover letter, and interview guide, with a preview and edit UI. Public Python repository (February 2025). Secondary example of a small AI application — not a computer-vision case study.

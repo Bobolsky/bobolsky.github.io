@@ -17,3 +17,4 @@ npm-debug.log*
 
 # Private source notes — never commit or publish
 CONTENT_SOURCE_notion_export.txt
+CONTENT_FINAL_notion_export.txt
