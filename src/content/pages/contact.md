@@ -1,6 +1,6 @@
 ---
 title: Contact
-description: For scoped ML work, get in touch with Andrea Zinno at andreazinno12@gmail.com.
+description: Have a problem that might need machine learning? Get in touch with Andrea Zinno at andreazinno12@gmail.com.
 ---
 
-For scoped ML work, get in touch at [**andreazinno12@gmail.com**](mailto:andreazinno12@gmail.com).
+Have a problem that might need machine learning? Get in touch at [**andreazinno12@gmail.com**](mailto:andreazinno12@gmail.com).

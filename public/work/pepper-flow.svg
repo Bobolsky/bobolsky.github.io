@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-labelledby="title desc">
+  <title id="title">High-level flow of the Pepper mall assistant</title>
+  <desc id="desc">1: camera input, from Pepper or from a PC camera when Pepper is off. 2: people and face detection, published on ROS topics. 3: a behaviour manager coordinates the ROS nodes and reads visitor attributes from a database. 4: speech and dialogue with Whisper speech-to-text and a RASA chatbot. 5: Pepper actions — text-to-speech, animation, tablet, wake and rest.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#FFD23F"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .box { fill: #181818; stroke: #3a3a3a; stroke-width: 2; }
+    .hl { fill: #1c1a12; stroke: #FFD23F; stroke-width: 2.5; }
+    .badge { fill: #FFD23F; }
+    .num { font-size: 18px; font-weight: 700; fill: #0a0a0a; }
+    .t { font-size: 24px; font-weight: 600; fill: #f4f1ea; }
+    .s { font-size: 19px; fill: #b3ada1; }
+    .ar { stroke: #FFD23F; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .ar2 { stroke: #FFD23F; stroke-width: 3; fill: none; marker-start: url(#arrow); marker-end: url(#arrow); }
+  </style>
+  <rect width="800" height="500" fill="#0f0f0f"/>
+
+  <rect class="box" x="30" y="30" width="340" height="130" rx="16"/>
+  <circle class="badge" cx="68" cy="70" r="18"/><text class="num" x="68" y="76" text-anchor="middle">1</text>
+  <text class="t" x="100" y="78">Camera</text>
+  <text class="s" x="58" y="116">Pepper's camera, or a PC</text>
+  <text class="s" x="58" y="142">camera when Pepper is off</text>
+
+  <rect class="box" x="430" y="30" width="340" height="130" rx="16"/>
+  <circle class="badge" cx="468" cy="70" r="18"/><text class="num" x="468" y="76" text-anchor="middle">2</text>
+  <text class="t" x="500" y="78">Detection</text>
+  <text class="s" x="458" y="116">People and face detection,</text>
+  <text class="s" x="458" y="142">published on ROS topics</text>
+
+  <rect class="hl" x="30" y="196" width="740" height="104" rx="16"/>
+  <circle class="badge" cx="68" cy="236" r="18"/><text class="num" x="68" y="242" text-anchor="middle">3</text>
+  <text class="t" x="100" y="244">Behaviour manager</text>
+  <text class="s" x="58" y="282">Coordinates the ROS nodes; reads visitor attributes from a database</text>
+
+  <rect class="box" x="30" y="340" width="340" height="130" rx="16"/>
+  <circle class="badge" cx="68" cy="380" r="18"/><text class="num" x="68" y="386" text-anchor="middle">4</text>
+  <text class="t" x="100" y="388">Speech &amp; dialogue</text>
+  <text class="s" x="58" y="426">Whisper speech-to-text,</text>
+  <text class="s" x="58" y="452">RASA chatbot</text>
+
+  <rect class="box" x="430" y="340" width="340" height="130" rx="16"/>
+  <circle class="badge" cx="468" cy="380" r="18"/><text class="num" x="468" y="386" text-anchor="middle">5</text>
+  <text class="t" x="500" y="388">Pepper actions</text>
+  <text class="s" x="458" y="426">Text-to-speech, animation,</text>
+  <text class="s" x="458" y="452">tablet, wake/rest</text>
+
+  <path class="ar" d="M372 95H422"/>
+  <path class="ar" d="M600 162V188"/>
+  <path class="ar2" d="M200 308V332"/>
+  <path class="ar" d="M600 302V332"/>
+</svg>

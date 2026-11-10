@@ -1,11 +1,11 @@
 ---
 title: About
-description: Andrea Zinno is a Machine Learning Engineer based in Barcelona, working as a generalist AI engineer with remote US and EU teams.
+description: Andrea Zinno is a Machine Learning Engineer and Forward Deployed AI Engineer based in Barcelona, working remotely with US and EU teams.
 ---
 
 Andrea Zinno is a Machine Learning Engineer with about two years of professional experience and a Master of Science in Computer Engineering — AI & Robotics from the University of Salerno (2024, Fisciano, Italy). He is based in Barcelona and works remotely with US and EU teams.
 
-He works as a generalist AI engineer, with particular depth in computer vision, making vision and classical models more efficient on real devices, and building synthetic-data pipelines when real data is scarce. He takes clearly scoped work, usually hourly, and hands it over so a team can keep shipping.
+He works as a generalist AI engineer, with particular depth in computer vision, making vision and classical models more efficient on real devices, and building synthetic-data pipelines when real data is scarce. He helps scope the work, usually engages hourly, and hands it over so a team can keep shipping.
 
 Languages: English (IELTS C1) and Italian (native).
 

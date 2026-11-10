@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-labelledby="title desc">
+  <title id="title">AI Apply Tool: five CrewAI agents turn a resume and a job URL into a tailored resume, cover letter and interview guide</title>
+  <desc id="desc">Inputs: a job description URL and an uploaded resume. Agent 1, Job Description Architect, reads the job description. Agent 2, Profiler Agent, builds a structured profile from the resume. Their outputs, job requirements and profile, feed agent 3, Resume Strategist, agent 4, Cover Letter Specialist, and agent 5, Interview Preparation Agent, which produce a tailored resume, a cover letter and an interview guide. Results are shown in a tabbed UI with live preview, editing and download.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#FFD23F"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .in { fill: none; stroke: #6b665d; stroke-width: 2; stroke-dasharray: 6 5; }
+    .box { fill: #181818; stroke: #3a3a3a; stroke-width: 2; }
+    .hl { fill: #1c1a12; stroke: #FFD23F; stroke-width: 2.5; }
+    .out { fill: #FFD23F; }
+    .badge { fill: #FFD23F; }
+    .num { font-size: 16px; font-weight: 700; fill: #0a0a0a; }
+    .i { font-size: 20px; font-weight: 500; fill: #d8d3c8; }
+    .t { font-size: 20px; font-weight: 600; fill: #f4f1ea; }
+    .o { font-size: 20px; font-weight: 700; fill: #0a0a0a; }
+    .s { font-size: 15px; fill: #8f8a80; }
+    .ar { stroke: #FFD23F; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .bus { stroke: #FFD23F; stroke-width: 3; fill: none; }
+  </style>
+  <rect width="800" height="500" fill="#0f0f0f"/>
+
+  <!-- inputs -->
+  <rect class="in" x="30" y="18" width="340" height="56" rx="12"/>
+  <text class="i" x="200" y="53" text-anchor="middle">Job description URL</text>
+  <rect class="in" x="430" y="18" width="340" height="56" rx="12"/>
+  <text class="i" x="600" y="53" text-anchor="middle">Resume (upload)</text>
+  <path class="ar" d="M200 76V100"/>
+  <path class="ar" d="M600 76V100"/>
+
+  <!-- agents 1-2 -->
+  <rect class="box" x="30" y="106" width="340" height="76" rx="14"/>
+  <circle class="badge" cx="62" cy="144" r="15"/><text class="num" x="62" y="150" text-anchor="middle">1</text>
+  <text class="t" x="86" y="151" style="font-size:18px">Job Description Architect</text>
+  <rect class="box" x="430" y="106" width="340" height="76" rx="14"/>
+  <circle class="badge" cx="462" cy="144" r="15"/><text class="num" x="462" y="150" text-anchor="middle">2</text>
+  <text class="t" x="488" y="151">Profiler Agent</text>
+
+  <!-- shared context -->
+  <path class="bus" d="M200 182V218M600 182V218M141 218H659"/>
+  <text class="s" x="400" y="210" text-anchor="middle">job requirements + structured profile</text>
+  <path class="ar" d="M141 218V246"/>
+  <path class="ar" d="M400 218V246"/>
+  <path class="ar" d="M659 218V246"/>
+
+  <!-- agents 3-5 -->
+  <rect class="hl" x="30" y="252" width="222" height="100" rx="14"/>
+  <circle class="badge" cx="56" cy="278" r="14"/><text class="num" x="56" y="284" text-anchor="middle">3</text>
+  <text class="t" x="141" y="308" text-anchor="middle">Resume</text>
+  <text class="t" x="141" y="334" text-anchor="middle">Strategist</text>
+
+  <rect class="hl" x="289" y="252" width="222" height="100" rx="14"/>
+  <circle class="badge" cx="315" cy="278" r="14"/><text class="num" x="315" y="284" text-anchor="middle">4</text>
+  <text class="t" x="400" y="308" text-anchor="middle">Cover Letter</text>
+  <text class="t" x="400" y="334" text-anchor="middle">Specialist</text>
+
+  <rect class="hl" x="548" y="252" width="222" height="100" rx="14"/>
+  <circle class="badge" cx="574" cy="278" r="14"/><text class="num" x="574" y="284" text-anchor="middle">5</text>
+  <text class="t" x="659" y="308" text-anchor="middle">Interview</text>
+  <text class="t" x="659" y="334" text-anchor="middle">Preparation</text>
+
+  <path class="ar" d="M141 354V382"/>
+  <path class="ar" d="M400 354V382"/>
+  <path class="ar" d="M659 354V382"/>
+
+  <!-- outputs -->
+  <rect class="out" x="30" y="388" width="222" height="64" rx="14"/>
+  <text class="o" x="141" y="427" text-anchor="middle">Tailored resume</text>
+  <rect class="out" x="289" y="388" width="222" height="64" rx="14"/>
+  <text class="o" x="400" y="427" text-anchor="middle">Cover letter</text>
+  <rect class="out" x="548" y="388" width="222" height="64" rx="14"/>
+  <text class="o" x="659" y="427" text-anchor="middle">Interview guide</text>
+
+  <text class="s" x="400" y="484" text-anchor="middle">Tabbed UI: live preview, edit, download</text>
+</svg>

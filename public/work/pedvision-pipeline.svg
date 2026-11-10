@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-labelledby="title desc">
+  <title id="title">PedVision pipeline: video frame, YOLOX detection, Deep SORT tracking, MTAN attribute recognition</title>
+  <desc id="desc">Four steps. 1: input video, processed frame by frame. 2: YOLOX-X, an anchor-free detector, finds the people in each frame. 3: Deep SORT keeps the same identity for each person over time. 4: a Multi-Task Attention Network predicts gender, bag, hat, and upper and lower clothing colour. Tracks also feed region-of-interest analysis of presence and passages.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#FFD23F"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .box { fill: #181818; stroke: #3a3a3a; stroke-width: 2; }
+    .hl { fill: #1c1a12; stroke: #FFD23F; stroke-width: 2.5; }
+    .badge { fill: #FFD23F; }
+    .num { font-size: 18px; font-weight: 700; fill: #0a0a0a; }
+    .t { font-size: 24px; font-weight: 600; fill: #f4f1ea; }
+    .k { font-size: 24px; font-weight: 600; fill: #FFD23F; }
+    .s { font-size: 19px; fill: #b3ada1; }
+    .f { font-size: 17px; fill: #8f8a80; }
+    .ar { stroke: #FFD23F; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+  </style>
+  <rect width="800" height="500" fill="#0f0f0f"/>
+
+  <rect class="box" x="30" y="50" width="340" height="170" rx="16"/>
+  <circle class="badge" cx="70" cy="94" r="18"/><text class="num" x="70" y="100" text-anchor="middle">1</text>
+  <text class="t" x="102" y="102">Video frame</text>
+  <text class="s" x="62" y="154">Input video, processed</text>
+  <text class="s" x="62" y="184">frame by frame</text>
+
+  <rect class="hl" x="430" y="50" width="340" height="170" rx="16"/>
+  <circle class="badge" cx="470" cy="94" r="18"/><text class="num" x="470" y="100" text-anchor="middle">2</text>
+  <text class="t" x="502" y="102">Detection <tspan class="k">YOLOX</tspan></text>
+  <text class="s" x="462" y="154">Anchor-free detector</text>
+  <text class="s" x="462" y="184">(YOLOX-X) finds people</text>
+
+  <rect class="hl" x="430" y="280" width="340" height="170" rx="16"/>
+  <circle class="badge" cx="470" cy="324" r="18"/><text class="num" x="470" y="330" text-anchor="middle">3</text>
+  <text class="t" x="502" y="332">Tracking <tspan class="k">Deep SORT</tspan></text>
+  <text class="s" x="462" y="384">Keeps each person's ID</text>
+  <text class="s" x="462" y="414">over time, through occlusions</text>
+
+  <rect class="hl" x="30" y="280" width="340" height="170" rx="16"/>
+  <circle class="badge" cx="70" cy="324" r="18"/><text class="num" x="70" y="330" text-anchor="middle">4</text>
+  <text class="t" x="102" y="332">Attributes <tspan class="k">MTAN</tspan></text>
+  <text class="s" x="62" y="384">Gender, bag, hat, upper</text>
+  <text class="s" x="62" y="414">and lower clothing colour</text>
+
+  <path class="ar" d="M372 135H422"/>
+  <path class="ar" d="M600 222V272"/>
+  <path class="ar" d="M428 365H378"/>
+
+  <text class="f" x="400" y="482" text-anchor="middle">Tracks also feed ROI analysis: presence and passages per region</text>
+</svg>

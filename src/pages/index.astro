@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CaseCard from '../components/CaseCard.astro';
+import CardCredits from '../components/CardCredits.astro';
 import BookingActions from '../components/BookingActions.astro';
 import Portrait from '../components/Portrait.astro';
 import site from '../data/site.json';
@@ -15,6 +16,7 @@ const h = home.data as Record<string, any>;
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-grid">
       <div class="hero-copy">
+        {h.eyebrow && <p class="eyebrow">{h.eyebrow}</p>}
         <h1>{h.heroTitle}</h1>
         <p class="lead">{h.heroSubtitle}</p>
         <BookingActions contactHref="/contact/" contactLabel={h.ctaPrimary}>
@@ -58,6 +60,7 @@ const h = home.data as Record<string, any>;
       <div class="grid grid-3">
         {work.map((c) => <CaseCard item={c} />)}
       </div>
+      <CardCredits items={work} />
       <p><a class="link-arrow" href="/work/">See selected work</a></p>
     </div>
   </section>

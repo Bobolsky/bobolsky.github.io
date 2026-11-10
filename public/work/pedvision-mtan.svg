@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract block diagram of a Multi-Task Attention Network for pedestrian attributes</title>
+  <desc id="desc">A person crop goes into a shared ResNet-50 backbone. Five task-specific attention modules read from the shared features, each feeding one attribute head: gender, bag, hat, upper clothing colour, lower clothing colour.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#FFD23F"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .box { fill: #181818; stroke: #3a3a3a; stroke-width: 2; }
+    .hl { fill: #1c1a12; stroke: #FFD23F; stroke-width: 2.5; }
+    .out { fill: #FFD23F; }
+    .t { font-size: 22px; font-weight: 600; fill: #f4f1ea; }
+    .y { font-size: 22px; font-weight: 600; fill: #FFD23F; }
+    .o { font-size: 21px; font-weight: 600; fill: #0a0a0a; }
+    .s { font-size: 18px; fill: #b3ada1; }
+    .ar { stroke: #FFD23F; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+  </style>
+  <rect width="800" height="500" fill="#0f0f0f"/>
+
+  <!-- input -->
+  <rect class="box" x="24" y="190" width="150" height="120" rx="14"/>
+  <text class="t" x="99" y="244" text-anchor="middle">Person</text>
+  <text class="t" x="99" y="272" text-anchor="middle">crop</text>
+  <path class="ar" d="M176 250H208"/>
+
+  <!-- backbone -->
+  <rect class="hl" x="214" y="40" width="180" height="420" rx="16"/>
+  <text class="t" x="304" y="226" text-anchor="middle">Shared</text>
+  <text class="t" x="304" y="254" text-anchor="middle">backbone</text>
+  <text class="y" x="304" y="292" text-anchor="middle">ResNet-50</text>
+
+  <!-- attention + heads -->
+  <g>
+    <rect class="box" x="444" y="40" width="150" height="68" rx="12"/>
+    <text class="s" x="519" y="80" text-anchor="middle">Attention</text>
+    <rect class="out" x="634" y="40" width="146" height="68" rx="12"/>
+    <text class="o" x="707" y="81" text-anchor="middle">Gender</text>
+    <path class="ar" d="M396 74H436"/><path class="ar" d="M596 74H626"/>
+  </g>
+  <g>
+    <rect class="box" x="444" y="128" width="150" height="68" rx="12"/>
+    <text class="s" x="519" y="168" text-anchor="middle">Attention</text>
+    <rect class="out" x="634" y="128" width="146" height="68" rx="12"/>
+    <text class="o" x="707" y="169" text-anchor="middle">Bag</text>
+    <path class="ar" d="M396 162H436"/><path class="ar" d="M596 162H626"/>
+  </g>
+  <g>
+    <rect class="box" x="444" y="216" width="150" height="68" rx="12"/>
+    <text class="s" x="519" y="256" text-anchor="middle">Attention</text>
+    <rect class="out" x="634" y="216" width="146" height="68" rx="12"/>
+    <text class="o" x="707" y="257" text-anchor="middle">Hat</text>
+    <path class="ar" d="M396 250H436"/><path class="ar" d="M596 250H626"/>
+  </g>
+  <g>
+    <rect class="box" x="444" y="304" width="150" height="68" rx="12"/>
+    <text class="s" x="519" y="344" text-anchor="middle">Attention</text>
+    <rect class="out" x="634" y="304" width="146" height="68" rx="12"/>
+    <text class="o" x="707" y="345" text-anchor="middle">Upper colour</text>
+    <path class="ar" d="M396 338H436"/><path class="ar" d="M596 338H626"/>
+  </g>
+  <g>
+    <rect class="box" x="444" y="392" width="150" height="68" rx="12"/>
+    <text class="s" x="519" y="432" text-anchor="middle">Attention</text>
+    <rect class="out" x="634" y="392" width="146" height="68" rx="12"/>
+    <text class="o" x="707" y="433" text-anchor="middle">Lower colour</text>
+    <path class="ar" d="M396 426H436"/><path class="ar" d="M596 426H626"/>
+  </g>
+</svg>

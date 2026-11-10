@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getCaseStudies } from '../../lib/content';
+import { dropMissingFigures, publicAssetExists } from '../../lib/assets';
 
 export async function getStaticPaths() {
   const items = await getCaseStudies();
@@ -13,6 +14,10 @@ interface Props { item: CollectionEntry<'caseStudies'> }
 const { item } = Astro.props;
 const d = item.data;
 const { Content } = await render(item);
+// Plain Markdown renders to static HTML; use it so figures with a missing image are skipped.
+const html = item.rendered?.html ? dropMissingFigures(item.rendered.html, item.id) : undefined;
+const credits = d.credits.filter((c) => publicAssetExists(c.src));
+const linkText = (href: string) => href.replace(/^https?:\/\//, '').replace(/\/$/, '');
 ---
 <Base title={d.title} description={`${d.cardTitle}. ${d.attribution}`}>
   <article>
@@ -26,18 +31,38 @@ const { Content } = await render(item);
           </ul>
         )}
         <p class="lead">{d.attribution}</p>
-        {d.repo && (
+        {(d.repo || d.links.length > 0) && (
           <dl class="meta">
-            <div><dt>Code</dt><dd><a href={d.repo} rel="noopener" target="_blank">{d.repo.replace('https://', '')}<span class="visually-hidden"> (opens in a new tab)</span></a></dd></div>
+            {d.repo && (
+              <div><dt>Code</dt><dd><a href={d.repo} rel="noopener" target="_blank">{linkText(d.repo)}<span class="visually-hidden"> (opens in a new tab)</span></a></dd></div>
+            )}
+            {d.links.map((l) => (
+              <div><dt>{l.label}</dt><dd><a href={l.href} rel="noopener" target="_blank">{l.text ?? linkText(l.href)}<span class="visually-hidden"> (opens in a new tab)</span></a></dd></div>
+            ))}
           </dl>
         )}
       </div>
     </header>
     <div class="section section-tight">
       <div class="container narrow prose">
-        <Content />
+        {html ? <Fragment set:html={html} /> : <Content />}
       </div>
       <div class="container narrow">
+        {credits.length > 0 && (
+          <aside class="credits" aria-labelledby="credits-heading">
+            <h2 id="credits-heading">Image credits</h2>
+            <ul>
+              {credits.map((c) => (
+                <li>
+                  <strong>{c.title}</strong>
+                  {c.author && <> — {c.author}</>}. {c.license}
+                  {c.licenseHref && <> (<a href={c.licenseHref} rel="noopener" target="_blank">license<span class="visually-hidden"> (opens in a new tab)</span></a>)</>}.
+                  {' '}Source: <a href={c.href} rel="noopener" target="_blank">{c.source}<span class="visually-hidden"> (opens in a new tab)</span></a>.
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
         <p><a class="link-arrow" href="/work/">Back to selected work</a></p>
       </div>
     </div>

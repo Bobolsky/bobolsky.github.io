@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import { publicAssetExists } from '../lib/assets';
 
 interface Props {
   item: CollectionEntry<'caseStudies'>;
@@ -9,14 +10,27 @@ interface Props {
 const { item, headingLevel = 3 } = Astro.props;
 const d = item.data;
 const H = `h${headingLevel}` as 'h2' | 'h3';
+
+// Card image: cardImage if present in public/, otherwise the fallback (if any).
+const usesPrimary = publicAssetExists(d.cardImage);
+const image = usesPrimary ? d.cardImage : publicAssetExists(d.cardImageFallback) ? d.cardImageFallback : undefined;
+// The fallback is always an original diagram, so its alt text is generic.
+const alt = usesPrimary ? (d.cardImageAlt ?? '') : `Diagram for ${d.cardTitle}`;
 ---
-<article class="card case-card reveal">
-  {d.tags.length > 0 && (
-    <ul class="tags" aria-label="Tags">
-      {d.tags.map((t) => <li>{t}</li>)}
-    </ul>
+<article class:list={['card', 'case-card', 'reveal', { 'has-media': image }]}>
+  {image && (
+    <figure class="card-media">
+      <img src={image} alt={alt} width="800" height="500" loading="lazy" decoding="async" />
+    </figure>
   )}
-  <H class="card-title"><a class="card-link" href={`/work/${item.id}/`}>{d.cardTitle}</a></H>
-  <p>{d.summary}</p>
+  <div class="card-body">
+    {d.tags.length > 0 && (
+      <ul class="tags" aria-label="Tags">
+        {d.tags.map((t) => <li>{t}</li>)}
+      </ul>
+    )}
+    <H class="card-title"><a class="card-link" href={`/work/${item.id}/`}>{d.cardTitle}</a></H>
+    <p>{d.summary}</p>
+  </div>
   <span class="card-arrow" aria-hidden="true"><Icon name="arrow" /></span>
 </article>

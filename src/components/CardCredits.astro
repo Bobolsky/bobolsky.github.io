@@ -1,0 +1,22 @@
+---
+// Credits for third-party images shown on case cards (only those actually rendered).
+import type { CollectionEntry } from 'astro:content';
+import { publicAssetExists } from '../lib/assets';
+
+interface Props { items: CollectionEntry<'caseStudies'>[] }
+const credits = Astro.props.items
+  .filter((c) => c.data.cardImageCredit && publicAssetExists(c.data.cardImage))
+  .map((c) => ({ text: c.data.cardImageCredit!, href: c.data.cardImageCreditHref }));
+---
+{credits.length > 0 && (
+  <p class="credits-note">
+    Image credits:{' '}
+    {credits.map((c, i) => (
+      <>
+        {i > 0 && '; '}
+        {c.href ? <a href={c.href} rel="noopener" target="_blank">{c.text}<span class="visually-hidden"> (opens in a new tab)</span></a> : c.text}
+      </>
+    ))}
+    .
+  </p>
+)}
